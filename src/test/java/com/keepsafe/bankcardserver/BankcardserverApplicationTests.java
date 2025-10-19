@@ -1,6 +1,5 @@
 package com.keepsafe.bankcardserver;
 
-import com.keepsafe.bankcardserver.bean.UserInfo;
 import com.keepsafe.bankcardserver.utils.HexConverter;
 import com.keepsafe.bankcardserver.utils.JwtUtil;
 import io.jsonwebtoken.security.Keys;
@@ -36,7 +35,7 @@ class BankcardserverApplicationTests {
 
     @Test
     void testGenToken() {
-        String token = jwtUtil.generateToken(new UserInfo(1));
+        String token = jwtUtil.generateToken(new UserDTO());
         log.info("token: {}", token);
     }
 

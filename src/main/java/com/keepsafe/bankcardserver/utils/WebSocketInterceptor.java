@@ -1,6 +1,6 @@
 package com.keepsafe.bankcardserver.utils;
 
-import com.keepsafe.bankcardserver.bean.UserInfo;
+import com.keepsafe.bankcardserver.data.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -26,7 +26,7 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
         if (request instanceof ServletServerHttpRequest servletRequest) {
             String token = servletRequest.getServletRequest().getParameter("token");
             try {
-                UserInfo userInfo = jwtUtil.getUserInfoFromToken(token);
+                UserDTO userInfo = jwtUtil.getUserInfoFromToken(token);
                 attributes.put("userInfo", userInfo);
             } catch (Exception e) {
                 throw new RuntimeException(e);

@@ -1,7 +1,7 @@
 package com.keepsafe.bankcardserver.utils
 
 import com.google.gson.Gson
-import com.keepsafe.bankcardserver.bean.UserInfo
+import com.keepsafe.bankcardserver.data.dto.UserDTO
 import com.keepsafe.bankcardserver.utils.HexConverter.hexStringToByteArray
 import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
@@ -38,7 +38,7 @@ class JwtUtil {
      * @param user 用户信息对象
      * @return JWT字符串
      */
-    fun generateToken(user: UserInfo): String {
+    fun generateToken(user: UserDTO): String {
         val userInfoJson = gson.toJson(user)
 
         return Jwts.builder()
@@ -55,7 +55,7 @@ class JwtUtil {
      * @param token JWT 字符串
      * @return UserInfo 对象
      */
-    fun getUserInfoFromToken(token: String): UserInfo {
+    fun getUserInfoFromToken(token: String): UserDTO {
         val claims = Jwts.parser()
             .verifyWith(getSigningKey())
             .build()
@@ -63,7 +63,7 @@ class JwtUtil {
             .payload
 
         val userInfo = claims["userInfo"] as String? ?: throw JwtException("userInfo claim is not found")
-        return gson.fromJson(userInfo, UserInfo::class.java)
+        return gson.fromJson(userInfo, UserDTO::class.java)
     }
 
     /**
