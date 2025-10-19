@@ -1,0 +1,19 @@
+spring:
+  application:
+      name: backcard
+
+server:
+    host: 127.0.0.1
+    port: 9085
+    servlet:
+        context-path: /backcard
+    shutdown: graceful
+
+logging:
+    level:
+      org.springframework.web: DEBUG
+      org.springframework.web.servlet.mvc.method.annotation: TRACE
+
+jwt:
+  secret: "d96581e5d499b551e59dc46a4eadab93bbc74258d90e2f728962a31b719a09a6"
+  expiration: 86400000
