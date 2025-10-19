@@ -40,6 +40,16 @@ public class WebSocketServiceImpl implements WebSocketService {
     @Override
     public void handleMessage(WebSocketSession session, String message) {
         log.info("a message received: {}", message);
+        // TODO
+        // 1. 如果是发送端，检查接收端是否有连接
+        // 2. 如没有，则等待
+        // 3. 如有，则将刷卡请求发送给接收端
+
+        // 1. 如果是接收端，检查发送段是否有连接
+        // 2. 如没有，则等待
+        // 3. 如有，则将卡片的基础信息发送给发送端显示
+
+        // 心跳检测
     }
 
     @Override
