@@ -24,8 +24,7 @@ public class BankcardserverApplication {
         Environment env = context.getEnvironment();
         String ip = InetAddress.getLocalHost().getHostAddress();
         String port = env.getProperty("server.port");
-        String contextPath = env.getProperty("server.servlet.context-path");
-        log.info("\n-------------------------------------------------------\n\tApplication Declare is running! Access URLs:\n\tlocal: \t\thttp://{}:{}/{}\n\texternal: \thttp://{}:{}{}\n\t", ip, port, contextPath, ip, port, contextPath);
+        log.info("\n-------------------------------------------------------\n\tApplication Declare is running! Access URLs:\n\tlocal: \t\thttp://{}:{}\n\texternal: \thttp://{}:{}\n\t", ip, port, ip, port);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.keepsafe.bankcardserver.config;
 
 import com.keepsafe.bankcardserver.utils.DefaultWebSocketHandler;
-import com.keepsafe.bankcardserver.utils.WebSocketInterceptor;
+import com.keepsafe.bankcardserver.interceptor.WebSocketInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.*;
@@ -22,6 +22,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(handler, "/websocket").addInterceptors(interceptor).setAllowedOrigins("*");
+        registry.addHandler(handler, "/ws").addInterceptors(interceptor).setAllowedOrigins("*");
     }
 }

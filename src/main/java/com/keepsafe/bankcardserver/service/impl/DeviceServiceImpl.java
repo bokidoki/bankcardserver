@@ -4,14 +4,15 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.keepsafe.bankcardserver.data.dao.DeviceInfo;
 import com.keepsafe.bankcardserver.data.dto.DeviceReqDTO;
+import com.keepsafe.bankcardserver.exception.BizException;
 import com.keepsafe.bankcardserver.mapper.DeviceMapper;
 import com.keepsafe.bankcardserver.service.DeviceService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import static com.keepsafe.bankcardserver.exception.BizCode.REQUEST_ERROR;
 
 @Service
 public class DeviceServiceImpl implements DeviceService {
@@ -42,7 +43,13 @@ public class DeviceServiceImpl implements DeviceService {
             return true;
         } else {
             // UUID已存在，不绑定
-            return false;
+            if (existingDevice.getUserId() != userId) {
+                // 设备已与其他用户绑定，请先解绑
+                throw new BizException(REQUEST_ERROR.getResultCode(), "设备已与其他用户绑定，请先解绑");
+            } else {
+                // 设备已绑定
+                throw new BizException(REQUEST_ERROR.getResultCode(), "设备已绑定");
+            }
         }
     }
 
@@ -58,9 +65,10 @@ public class DeviceServiceImpl implements DeviceService {
             // 存在且属于用户，删除
             deviceMapper.deleteById(device);
             return true;
+        } else {
+            // 设备与该用户无绑定关系
+            throw new BizException(REQUEST_ERROR.getResultCode(), "设备与该用户无绑定关系");
         }
-        // 不存在或不属于用户，返回false
-        return false;
     }
 
     @NotNull

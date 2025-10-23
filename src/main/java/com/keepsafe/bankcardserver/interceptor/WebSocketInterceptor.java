@@ -1,6 +1,7 @@
-package com.keepsafe.bankcardserver.utils;
+package com.keepsafe.bankcardserver.interceptor;
 
 import com.keepsafe.bankcardserver.data.dto.UserDTO;
+import com.keepsafe.bankcardserver.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;

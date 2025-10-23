@@ -1,5 +1,6 @@
 package com.keepsafe.bankcardserver.controller.api;
 
+import com.keepsafe.bankcardserver.data.dto.BaseResp;
 import com.keepsafe.bankcardserver.data.dto.DeviceReqDTO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,5 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface DeviceApi {
 
     @PostMapping("bind")
-    void bindDevice(DeviceReqDTO dto, long userId);
+    BaseResp<String> bindDevice(DeviceReqDTO dto, long userId);
+
+    @PostMapping("unbind")
+    BaseResp<String> unbindDevice(String uuid, long userId);
 }
